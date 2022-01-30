@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+{% block content%}
+
+<div class="col-md-4 offset-md-4">
+    <form action="/" class="card card-body">
+        <h1>Token</h1>
+        {{token}}
+        <script>
+            //if(localStorage.getItem("count_timer")){
+            //    var count_timer = localStorage.getItem("count_timer");
+            //} else {
+            //    var count_timer = 60*0.2;
+            //}
+            var count_timer = 60;
+            //var seconds = parseInt(count_timer%60);
+            var seconds = parseInt(count_timer);
+            function countDownTimer(){
+                if(seconds < 10){
+                    seconds= "0"+ seconds ;
+                }
+                document.getElementById("total-time-left").innerHTML = "Time: "+seconds+" Seconds";
+                if(count_timer <= 0){
+                    localStorage.clear("count_timer");
+                    location.href = location.href
+                } else {
+                    count_timer = count_timer -1 ;
+                    seconds = parseInt(count_timer%60);
+                    localStorage.setItem("count_timer",count_timer);
+                    setTimeout("countDownTimer()",1000);
+                }
+            }
+            setTimeout("countDownTimer()",1000);
+            </script>
+            <body>
+               <!--div id="total-time-left" align="center"> </div-->
+               <div id="total-time-left"> </div>
+            </body>
+        <button >Salir</button>
+    </form>
+</div>
+
+{% endblock %}
